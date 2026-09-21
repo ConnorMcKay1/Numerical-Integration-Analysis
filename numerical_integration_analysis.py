@@ -30,6 +30,9 @@ def slice_controler():
    
    return 15
 
+
+
+
 # TRAPEZOID METHOD
 def trapezoid_method(f1):
    slices = np.array([-3, -2, -1, 0, 1, 2, 3])
@@ -102,12 +105,11 @@ def display(f, slices):
    
    
    # draws the lines from one slice to another using slope
-    # Connecting lines
    for x1, x2, y1, y2 in zip(slices, slices[1:], y, y[1:]):
       ax.plot(
          [x1, x2],
          [y1, y2],
-         color='blue',
+         color='fuchsia',
          linewidth=1.5
          )
 
@@ -120,7 +122,7 @@ def display(f, slices):
    
 
 
-print(slice_controler())
+#print(slice_controler())
 
 #trapezoid_method(f1)
 
@@ -128,7 +130,7 @@ print(slice_controler())
 
 #slice_connecting(slices, y)
 
-#display(f1, slices)
+display(f1, slices)
 
 
 
