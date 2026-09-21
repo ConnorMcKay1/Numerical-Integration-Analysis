@@ -7,9 +7,9 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 ## Figures
 
 <p align="center">
-  <img src="Numerical-Integration-Analysis/Trapezoid_Slices_Connected.png">
+  <img src="Trapezoid_Slices.png" width="600">
 </p>
 
 <p align="center">
-  <img src="Numerical-Integration-Analysis/Trapezoid_Slices.png">
+  <img src="Trapezoid_Slices_Connected.png" width="600">
 </p>
