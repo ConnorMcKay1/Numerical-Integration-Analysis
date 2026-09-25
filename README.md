@@ -8,9 +8,9 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 ## Figures
 
 <p align="center">
-  <img src="Trapezoid_Slices.png" width="600">
+  <img src="Trapezoid_Slices(1).png" width="600">
 </p>
 
 <p align="center">
-  <img src="Trapezoid_Slices_Connected.png" width="600">
+  <img src="Trapezoid_Slices(2).png" width="600">
 </p>
