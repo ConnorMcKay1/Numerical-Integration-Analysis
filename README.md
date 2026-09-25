@@ -14,7 +14,3 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 <p align="center">
   <img src="Trapezoid_Slices(2).png" width="600">
 </p>
-
-<p align="center">
-  <img src="Trapezoid_Slices(3).png" width="600">
-</p>
