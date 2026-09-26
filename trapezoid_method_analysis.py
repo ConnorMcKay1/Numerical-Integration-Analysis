@@ -49,6 +49,8 @@ def slice_controler():
    
    return slices
    
+   
+   
 # TRAPEZOID METHOD
 def trapezoid_method(f1, slices):
    print("ENTERING: trapezoid_method")
