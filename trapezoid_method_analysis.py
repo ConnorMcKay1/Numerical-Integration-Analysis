@@ -34,7 +34,7 @@ def f1(x):
 def slice_controler():
    print("ENTERING: slice_controler")
    number_of_slices = 15
-   x2 = 3.5
+   x2 = 3
    x1 = -3
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
@@ -118,7 +118,15 @@ def display(f, slices, y):
          )
 
    ax.set(xlabel='STEPS', ylabel="F(x)",
-          title='Trapezoid Method\n' f"F(x) = ${f.__doc__}$" if f.__doc__ else f"${f.__name__}(x)$")
+          title=(
+            'Trapezoid Method\n'
+            + (rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__doc__}\,dx$"
+               if f.__doc__
+               else rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__name__}(x)\,dx$"
+              )
+            + f" | # of slices: {len(slices)}"
+            )
+         )
    ax.grid(alpha = .5, linestyle = 'dashed')
    ax.margins(0.5)
 
