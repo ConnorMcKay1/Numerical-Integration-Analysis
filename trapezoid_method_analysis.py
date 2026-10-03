@@ -49,8 +49,6 @@ def slice_controler():
    
    return slices
    
-   
-   
 # TRAPEZOID METHOD
 def trapezoid_method(f1, slices):
    print("ENTERING: trapezoid_method")
@@ -82,7 +80,7 @@ def slice_connecting(slices, y):
    
    return slopes
       
-# GAUSS-KRONROD METHOD
+# GAUSS-KRONROD METHOD (for accuracy testing)
 def gauss_kronrod_method(f1):
    I2 = integrate.quad(f1, 0, 5)
    print("\n Gauss-Kronrod Result:", I2[0])
