@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 print("test test 123")
 
 
-#f(x)=x^{4}-5x^{2}+4
+#f(x)=x^{4}-5x^{2}+10
 #f(x)=((x**4) - (5*(x**2)) + 10)
 def f1(x):
    """x^4 - 5x^2 + 10"""
