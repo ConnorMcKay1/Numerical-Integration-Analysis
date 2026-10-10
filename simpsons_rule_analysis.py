@@ -121,20 +121,21 @@ def main():
 '''
       
 
+#f(x)=x^{4}-5x^{2}+4
+#f(x)=((x**4) - (5*(x**2)) + 10)
 def f1(x):
-    '''x^3 + 4x^2 + x + 14'''
-    return ((x**3)+(4*x**2)+(x)+14)
+   """x^4 - 5x^2 + 10"""
+   return ((x**4) - (5*(x**2)) + 10)
+
 
 # subsections/slices
-slices = np.linspace(0, 10, 11)
+slices = np.linspace(-4, 4, 15)
 
 
 # POLYNOMIAL_CREATOR
 def polynomial_creator(f1, slices):
     print("ENTERING: polynomial_creator")
     
-    # Simpson's integral
-    #I = simpson(f1, slices)
 
     y = f1(slices)
 
@@ -157,8 +158,6 @@ def polynomial_creator(f1, slices):
 
     return y, polynomials,smooth_polynomial_inputs ,smooth_polynomial_values  
         # returns a list of polynomials
-
-
 
 
 
@@ -185,21 +184,13 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
         zorder= 2
    )
    
-    # draws the lines from one slice to another using slope
-    ax.plot(
-        smooth_polynomial_inputs,
-        smooth_polynomial_values,
-        color='fuchsia',
-        linewidth=1.5
-    )
-
-#    for x1, x2, y1, y2 in zip(slices, slices[1:], y, y[1:]):
-#       ax.plot(
-#          [x1, x2],
-#          [y1, y2],
-#          color='fuchsia',
-#          linewidth=1.5
-#          )
+    # draws the lines from one panel to another using computed quadratics
+    # ax.plot(
+    #     smooth_polynomial_inputs,
+    #     smooth_polynomial_values,
+    #     color='fuchsia',
+    #     linewidth=1.5
+    # )
 
     ax.set(xlabel='STEPS', ylabel="F(x)",
         title=(
@@ -227,7 +218,7 @@ def main():
     # polynomials,smooth_polynomial_inputs ,smooth_polynomial_values
     
     
-    # prints list of polynomials
+    # prints list of y values
     print("# *y values*################################################################")
     #y, _, _ ,_ = polynomial_creator(f1, slices)
     #print(y)
