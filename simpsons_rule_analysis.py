@@ -141,20 +141,34 @@ def polynomial_creator(f1, slices):
 
     # Quadratics for the all of the Simpson subsections/slices
     polynomials = []
+    
+    list_of_panel_points = []
+    
     smooth_polynomial_inputs = []
     smooth_polynomial_values = []
 
     for i in range(0, len(slices) - 2, 2):
         p = np.poly1d(np.polyfit(slices[i:i+3], y[i:i+3], 2))
+        
+        panel_points = (slices[i:i+3], y[i:i+3], 2)
+        
         x_smooth = np.linspace(slices[i], slices[i+2], 100)
         y_smooth = p(x_smooth)
 
         polynomials.append(p)
+        
+        list_of_panel_points.append(panel_points)
+        
         smooth_polynomial_inputs.append(x_smooth)
         smooth_polynomial_values.append(y_smooth)
 
+    # just prints list of polynomials   
     for i, p in enumerate(polynomials):
         print(f"PANEL {i}: \n {p}")
+        
+    # used to actually see the 3 points used to fit a polynomial for each panel/slice
+    for i, panel_points in enumerate(list_of_panel_points):
+        print(f"PANEL POINTS {i}: \n {panel_points}")
 
     return y, polynomials,smooth_polynomial_inputs ,smooth_polynomial_values  
         # returns a list of polynomials
@@ -185,12 +199,17 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
    )
    
     # draws the lines from one panel to another using computed quadratics
-    # ax.plot(
-    #     smooth_polynomial_inputs,
-    #     smooth_polynomial_values,
-    #     color='fuchsia',
-    #     linewidth=1.5
-    # )
+    for x_smooth, y_smooth in zip(
+        smooth_polynomial_inputs,
+        smooth_polynomial_values
+        ):
+            ax.plot(
+            x_smooth,
+            y_smooth,
+            color='fuchsia',
+            linewidth=1.5,
+            zorder=3
+    )
 
     ax.set(xlabel='STEPS', ylabel="F(x)",
         title=(
