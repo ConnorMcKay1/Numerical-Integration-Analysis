@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# Below is old structure that will be used to help mold developing code
+'''
 
 #f(x)=x^{4}-5x^{2}+4
 #f(x)=((x**4) - (5*(x**2)) + 10)
@@ -101,9 +103,6 @@ def display(f, slices, y):
 
 
 
-
-
-
 def main():
    print("Going Through Entry Point")
     
@@ -115,6 +114,146 @@ def main():
    
    
    display(f1, slices, y)
+   
+
+
+
+'''
+      
+
+def f1(x):
+    '''x^3 + 4x^2 + x + 14'''
+    return ((x**3)+(4*x**2)+(x)+14)
+
+# subsections/slices
+slices = np.linspace(0, 10, 11)
+
+
+# POLYNOMIAL_CREATOR
+def polynomial_creator(f1, slices):
+    print("ENTERING: polynomial_creator")
+    
+    # Simpson's integral
+    #I = simpson(f1, slices)
+
+    y = f1(slices)
+
+    # Quadratics for the all of the Simpson subsections/slices
+    polynomials = []
+    smooth_polynomial_inputs = []
+    smooth_polynomial_values = []
+
+    for i in range(0, len(slices) - 2, 2):
+        p = np.poly1d(np.polyfit(slices[i:i+3], y[i:i+3], 2))
+        x_smooth = np.linspace(slices[i], slices[i+2], 100)
+        y_smooth = p(x_smooth)
+
+        polynomials.append(p)
+        smooth_polynomial_inputs.append(x_smooth)
+        smooth_polynomial_values.append(y_smooth)
+
+    for i, p in enumerate(polynomials):
+        print(f"PANEL {i}: \n {p}")
+
+    return y, polynomials,smooth_polynomial_inputs ,smooth_polynomial_values  
+        # returns a list of polynomials
+
+
+
+
+
+# DISPLAY
+def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
+    print("ENTERING: display")
+    
+    min, max = slices.min(), slices.max()
+    x_intputs = np.linspace(min, max, 1000)
+    x_axis = x_intputs
+    y_axis = f(x=x_intputs)
+    fig, ax = plt.subplots()
+   
+    # colours axis red, and places vertical lines for trapezoid slices
+    ax.plot(x_axis, y_axis)
+    ax.axhline(0, color='red', linewidth=.8, zorder=1)
+    ax.axvline(0, color='red', linewidth=.8, zorder=1)
+    ax.vlines(
+        x=slices,
+        ymin=0,
+        ymax=y,
+        color='springgreen',
+        linewidth=.8,
+        zorder= 2
+   )
+   
+    # draws the lines from one slice to another using slope
+    ax.plot(
+        smooth_polynomial_inputs,
+        smooth_polynomial_values,
+        color='fuchsia',
+        linewidth=1.5
+    )
+
+#    for x1, x2, y1, y2 in zip(slices, slices[1:], y, y[1:]):
+#       ax.plot(
+#          [x1, x2],
+#          [y1, y2],
+#          color='fuchsia',
+#          linewidth=1.5
+#          )
+
+    ax.set(xlabel='STEPS', ylabel="F(x)",
+        title=(
+            'Trapezoid Method\n'
+            + (rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__doc__}\,dx$"
+               if f.__doc__
+               else rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__name__}(x)\,dx$"
+              )
+            + f" | # of slices: {len(slices)}"
+            )
+         )
+    ax.grid(alpha = .5, linestyle = 'dashed')
+    ax.margins(0.5)
+
+    plt.show()
+
+
+
+
+
+def main():
+    print("Going Through Entry Point")
+
+
+    # polynomials,smooth_polynomial_inputs ,smooth_polynomial_values
+    
+    
+    # prints list of polynomials
+    print("# *y values*################################################################")
+    #y, _, _ ,_ = polynomial_creator(f1, slices)
+    #print(y)
+    
+    # prints list of polynomials
+    print("# *polynomials*################################################################")
+    # _, polynomials,_ ,_ = polynomial_creator(f1, slices)
+    # print(polynomials)
+   
+   # prints list of x inputs that are going to be used to draw the subsection polynomials
+    print("# *smooth inputs*################################################################")
+    # _, _ ,smooth_polynomial_inputs , _ = polynomial_creator(f1, slices)
+    # print(smooth_polynomial_inputs)
+   
+   # prints a list of computed y values that will also be used to draw the polylines
+    print("# *smooth values*################################################################")
+    # _, _, _, smooth_polynomial_values = polynomial_creator(f1, slices)
+    # print(smooth_polynomial_values)
+    
+    y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
+    
+    display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
+    
+   
+    #display(f1, slices, y)
+
 
 
 if __name__ == "__main__":
