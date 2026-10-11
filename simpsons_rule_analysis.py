@@ -11,7 +11,7 @@ def f1(x):
 
 def slice_controller():
     print("ENTERING: slice_controler")
-    number_of_slices = 14
+    number_of_slices = 15
     x2 = 3
     x1 = -3
     slices = np.linspace(x1, x2, number_of_slices)
@@ -28,7 +28,6 @@ def simpsons_rule(f1, slices):
    y = f1(slices)
    I1 = integrate.simpson(y, slices)
    print(f"Simpson's rule result: {I1}|")
-
 
 # POLYNOMIAL_CREATOR
 def polynomial_creator(f1, slices):
@@ -110,7 +109,7 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
 
     ax.set(xlabel='STEPS', ylabel="F(x)",
         title=(
-            'Trapezoid Method\n'
+            'Simpson\'s Rule\n'
             + (rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__doc__}\,dx$"
                if f.__doc__
                else rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__name__}(x)\,dx$"

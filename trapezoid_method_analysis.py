@@ -32,10 +32,10 @@ def f1(x):
 # (x2 - x1)/slice
 #number of slices
 def slice_controler():
-   print("ENTERING: slice_controler")
+   print("\n ENTERING: slice_controler")
    number_of_slices = 15
-   x2 = 3
-   x1 = -3
+   a = x1 = -3
+   b = x2 = 3
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
    while len(slices) <= number_of_slices:
@@ -45,22 +45,22 @@ def slice_controler():
    slices = np.array(slices) #this is just to convert from py list to np array for math
       
    #print("Slice Step Distance: ", slice_step_distance)
-   print("List of slices: ", slices)
+   #print("List of slices: ", slices)
    
-   return slices
+   return a, b, slices
    
 # TRAPEZOID METHOD
 def trapezoid_method(f1, slices):
-   print("ENTERING: trapezoid_method")
+   print("\n ENTERING: trapezoid_method")
    #slices = np.array([-3, -2, -1, 0, 1, 2, 3])
    y = f1(slices)
    I1 = integrate.trapezoid(y, slices)
    print(f"Trapezoid method result: {I1}|")
    return slices, y
    
-# Connecting Trapezoid Slices
+# Connecting Trapezoid Slices    NO LONGER NEEDED
 def slice_connecting(slices, y):
-   print("Entering the slice connecting function")
+   print("\n Entering the slice connecting function \n")
    
    # takes in the y (for the height)
    # takes in the x (for the slice location)
@@ -81,13 +81,14 @@ def slice_connecting(slices, y):
    return slopes
       
 # GAUSS-KRONROD METHOD (for accuracy testing)
-def gauss_kronrod_method(f1):
-   I2 = integrate.quad(f1, 0, 5)
-   print("\n Gauss-Kronrod Result:", I2[0])
+def gauss_kronrod_method(f1, a, b):
+   print("\n ENTERING: gauss_Kronrod_method")
+   I2 = integrate.quad(f1, a, b)
+   print("Gauss-Kronrod Result:", I2[0])
 
 # Displays function, slices(ax.vlines), and connects slices to form trapezoids
 def display(f, slices, y):
-   print("ENTERING: display")
+   print("\n ENTERING: display")
    
    min, max = slices.min(), slices.max()
    x_intputs = np.linspace(min, max, 1000)
@@ -134,30 +135,19 @@ def display(f, slices, y):
    
 
 
-#slice_controler()
-
-#print(slice_controler())
-
-#trapezoid_method(f1, slices)
-
-#gauss_kronrod_method(f1)
-
-#slice_connecting(slices, y)
-
-#display(f1, slices, y)
-
-
 def main():
-   print("Starting Analysis...")
+   print("Going Through Entry Point \n")
    
-   slices = slice_controler()
+   a, b, slices = slice_controler()
+   
+   trapezoid_method(f1, slices)
+   
+   #_, y = trapezoid_method(f1, slices)
+   
+   gauss_kronrod_method(f1, a, b)
    
    
-   _, y = trapezoid_method(f1, slices)
-   gauss_kronrod_method(f1)
-   
-   
-   display(f1, slices, y)
+   #display(f1, slices, y)
 
 if __name__ == "__main__":
    main()
