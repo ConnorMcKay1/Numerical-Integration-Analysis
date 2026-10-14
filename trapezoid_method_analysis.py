@@ -32,7 +32,7 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 21
+   number_of_slices = 15
    a = x1 = -3
    b = x2 = 3
    slice_step_distance = (x2-x1)/number_of_slices
@@ -124,7 +124,7 @@ def display(f, slices, y):
                if f.__doc__
                else rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__name__}(x)\,dx$"
               )
-            + f" | # of slices: {len(slices)}"
+            + f" | # of slices: {len(slices) - 1}"
             )
          )
    ax.grid(alpha = .5, linestyle = 'dashed')
@@ -138,13 +138,13 @@ def main():
    
    a, b, slices = slice_controler()
    
-   trapezoid_method(f1, slices)
+   #trapezoid_method(f1, slices)
    
-   #_, y = trapezoid_method(f1, slices)
+   _, y = trapezoid_method(f1, slices)
    
-   gauss_kronrod_method(f1, a, b)
+   #gauss_kronrod_method(f1, a, b)
    
-   #display(f1, slices, y)
+   display(f1, slices, y)
 
 if __name__ == "__main__":
    main()
