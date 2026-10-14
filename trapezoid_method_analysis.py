@@ -17,7 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-print("test test 123")
+print("TRAPEZOID_METHOD_ANALYSIS.py")
 
 
 #f(x)=x^{4}-5x^{2}+10
@@ -27,13 +27,12 @@ def f1(x):
    return ((x**4) - (5*(x**2)) + 10)
 
 
-
 # input range --> goes into trap method and display (linespace)
 # (x2 - x1)/slice
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 15
+   number_of_slices = 21
    a = x1 = -3
    b = x2 = 3
    slice_step_distance = (x2-x1)/number_of_slices
@@ -132,7 +131,6 @@ def display(f, slices, y):
    ax.margins(0.5)
 
    plt.show()
-   
 
 
 def main():
@@ -145,7 +143,6 @@ def main():
    #_, y = trapezoid_method(f1, slices)
    
    gauss_kronrod_method(f1, a, b)
-   
    
    #display(f1, slices, y)
 

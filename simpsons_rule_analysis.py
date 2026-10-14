@@ -1,37 +1,37 @@
 import scipy.integrate as integrate
+from numpy import sin, cos, pi
 import numpy as np
 import matplotlib.pyplot as plt
       
+      
+print("SIMPSONS_METHOD_ANALYSIS.py")
 
 #f(x)=x^{4}-5x^{2}+10
-#f(x)=((x**4) - (5*(x**2)) + 10)
+#f(x)=((x**4) - (5*(x**2)) + 10)X
 def f1(x):
    """x^4 - 5x^2 + 10"""
    return ((x**4) - (5*(x**2)) + 10)
 
+# SLICE CONTROLLER
 def slice_controller():
-    print("ENTERING: slice_controler")
-    number_of_slices = 15
-    x2 = 3
-    x1 = -3
-    slices = np.linspace(x1, x2, number_of_slices)
-        
-    return slices
-
-
-# subsections/slices
-slices = slice_controller()
+    print("\n ENTERING: slice_controler")
+    number_of_slices = 21
+    a = -3
+    b = 3
+    slices = np.linspace(a, b, number_of_slices)
+    
+    return a, b, slices
 
 # SIMPSON'S RULE
 def simpsons_rule(f1, slices):
-   print("ENTERING: simpsons rule")
+   print("\n ENTERING: simpsons rule")
    y = f1(slices)
    I1 = integrate.simpson(y, slices)
    print(f"Simpson's rule result: {I1}|")
 
 # POLYNOMIAL_CREATOR
 def polynomial_creator(f1, slices):
-    print("ENTERING: polynomial_creator")
+    print("\n ENTERING: polynomial_creator")
     
     y = f1(slices)
 
@@ -71,9 +71,15 @@ def polynomial_creator(f1, slices):
     return y, polynomials,smooth_polynomial_inputs ,smooth_polynomial_values  
         # returns a list of polynomials
 
+# GAUSS-KRONROD METHOD (for accuracy testing)
+def gauss_kronrod_method(f1, a, b):
+   print("\n ENTERING: gauss_Kronrod_method")
+   I2 = integrate.quad(f1, a, b)
+   print("Gauss-Kronrod Result:", I2[0])
+
 # DISPLAY
 def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
-    print("ENTERING: display")
+    print("\n ENTERING: display")
     
     min, max = slices.min(), slices.max()
     x_intputs = np.linspace(min, max, 1000)
@@ -123,17 +129,18 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
     plt.show()
 
 
-
-
-
 def main():
     print("Going Through Entry Point")
     
-    y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
+    a, b, slices = slice_controller()
+    
+    #y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
     
     simpsons_rule(f1, slices)
     
-    display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
+    gauss_kronrod_method(f1, a, b)
+    
+    #display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
 
 
 if __name__ == "__main__":
