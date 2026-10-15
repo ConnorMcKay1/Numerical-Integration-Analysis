@@ -15,11 +15,11 @@ def f1(x):
 # SLICE CONTROLLER
 def slice_controller():
     print("\n ENTERING: slice_controler")
-    number_of_slices = 21
+    number_of_slices = 12
     a = -3
     b = 3
-    slices = np.linspace(a, b, number_of_slices)
-    
+    slices = np.linspace(a, b, number_of_slices + 1)
+        
     return a, b, slices
 
 # SIMPSON'S RULE
@@ -43,7 +43,7 @@ def polynomial_creator(f1, slices):
     smooth_polynomial_inputs = []
     smooth_polynomial_values = []
 
-    for i in range(0, len(slices) - 2, 2):
+    for i in range(0, (len(slices)) - 2, 2):
         p = np.poly1d(np.polyfit(slices[i:i+3], y[i:i+3], 2))
         
         panel_points = (slices[i:i+3], y[i:i+3], 2)
@@ -120,7 +120,7 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
                if f.__doc__
                else rf"$\int_{{{min:.6g}}}^{{{max:.6g}}} {f.__name__}(x)\,dx$"
               )
-            + f" | # of slices: {len(slices)}"
+            + f" | # of slices: {len(slices) - 1}"
             )
          )
     ax.grid(alpha = .5, linestyle = 'dashed')
@@ -134,13 +134,13 @@ def main():
     
     a, b, slices = slice_controller()
     
-    #y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
+    y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
     
-    simpsons_rule(f1, slices)
+    #simpsons_rule(f1, slices)
     
-    gauss_kronrod_method(f1, a, b)
+    #gauss_kronrod_method(f1, a, b)
     
-    #display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
+    display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
 
 
 if __name__ == "__main__":
