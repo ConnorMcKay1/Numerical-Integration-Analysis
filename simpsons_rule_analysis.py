@@ -136,11 +136,13 @@ def main():
     
     y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
     
+    print(slices)
+    
     #simpsons_rule(f1, slices)
     
     #gauss_kronrod_method(f1, a, b)
     
-    display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
+    #display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
 
 
 if __name__ == "__main__":

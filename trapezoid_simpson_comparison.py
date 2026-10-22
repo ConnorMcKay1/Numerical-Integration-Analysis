@@ -27,27 +27,27 @@ def f1(x):
    """x^4 - 5x^2 + 10"""
    return ((x**4) - (5*(x**2)) + 10)
 
-# SLICE CONTROLLER: used for 
-def slice_controller():
-    print("\n ENTERING: slice_controler")
-    number_of_slices = 16
-    a = -3
-    b = 3
-    slices = np.linspace(a, b, number_of_slices + 1)
-        
-    return a, b, slices
-
-
 def slices():
     print("\n ENTERING: slices")
 
-    start = -4
-    stop = 4
-    step = 2
+    # start / stop for function, it sets the boundaries of the integral
+    start_integral = -3
+    stop_integral = 3
+    slices_per_integral = None
+    
+    slices = np.linspace(start_integral, stop_integral, )# number of for that step  + 1)
+    
+    # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
+    # esentially it will make a, list of lists [4, 8. 12. 16. . . . n]
+    start_slice_amount = 4
+    stop_slice_amount = 20
+    slice_amount_step = 4
+    
     slice_list = []
     
-    for i in range(start, stop + 1, step):
+    for i in range(start_slice_amount, stop_slice_amount + 1, slice_amount_step):
         slice_list.append(i)
+        
     print(slice_list)
     
     return slice_list
