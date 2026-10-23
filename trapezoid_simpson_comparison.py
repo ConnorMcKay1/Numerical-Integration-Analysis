@@ -35,20 +35,49 @@ def slices():
     stop_integral = 3
     slices_per_integral = None
     
-    slices = np.linspace(start_integral, stop_integral, )# number of for that step  + 1)
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
-    # esentially it will make a, list of lists [4, 8. 12. 16. . . . n]
+    # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
     start_slice_amount = 4
     stop_slice_amount = 20
     slice_amount_step = 4
     
-    slice_list = []
+    slice_list = [] # list containing number of slices, ex: [4, 8, 12, 16, . . . n]
     
-    for i in range(start_slice_amount, stop_slice_amount + 1, slice_amount_step):
-        slice_list.append(i)
+    
+    for slice_amount in range(start_slice_amount, stop_slice_amount + 1, slice_amount_step):
+        slice_list.append(slice_amount)
         
     print(slice_list)
+    
+    np_slice_list = np.array(slice_list) # again converst list to np array
+    
+    trapezoid_result_list = [] # list of x/slice values, ex: [-3.  -2.6 -2.2 -1.8 -1.4 -1.  -0.6 -0.2 
+                               #                               0.2  0.6  1.  1.4  1.8  2.2   2.6  3. ]
+    
+    for number_of_slices in (np_slice_list):
+        slices = np.linspace(start_integral, stop_integral, number_of_slices)# number of for that step  + 1)
+        trapezoid_result_list.append(slices)
+
+
+    # this loop will print out the slice_amount with it's corresponding number_of_slices 
+    for slice_amount, number_of_slices in zip(slice_list, trapezoid_result_list):
+        print(
+              f"Slice Amount: {slice_amount}\n"
+              f"Number of Slices: {number_of_slices}\n"
+        )
+
+
+    # for slice_amount, number_of_slices in slice_list, trapezoid_result_list:
+    #     print(f"Slice Amount: {slice_amount} \n Number of Slices: {trapezoid_result_list} \n ")
+    
+    # for slices in (np_slice_list):
+    #     print("Numbers:",slices)
+    #     _, trap_result = trapezoid_method(f1, slices)
+    #     trapezoid_result_list.append(trap_result)
+
+    
+    
     
     return slice_list
     
@@ -56,19 +85,15 @@ def slices():
 
 def trapezoid_results(f1, slice_list):
     print("\n ENTERING: trapezoid_results")
-
-    print(slice_list)    
+    
     trapezoid_result_list = []
-    slices = np.array(slice_list)
 
-    for i in slices:
-        print(i)
-
+    
     # for slices in slice_list:
     #     _, trap_result = trapezoid_method(f1, slices)
     #     trapezoid_result_list.append(trap_result)
         
-    #print(trapezoid_result_list)
+    print(trapezoid_result_list)
 
 
 
