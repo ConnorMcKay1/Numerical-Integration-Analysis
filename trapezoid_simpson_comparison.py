@@ -32,9 +32,7 @@ def slices():
 
     # start / stop for function, it sets the boundaries of the integral
     start_integral = -3
-    stop_integral = 3
-    slices_per_integral = None
-    
+    stop_integral = 3    
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
     # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
@@ -52,56 +50,52 @@ def slices():
     
     np_slice_list = np.array(slice_list) # again converst list to np array
     
-    trapezoid_result_list = [] # list of x/slice values, ex: [-3.  -2.6 -2.2 -1.8 -1.4 -1.  -0.6 -0.2 
+    universal_slice_list = [] # list of x/slice values, ex: [-3.  -2.6 -2.2 -1.8 -1.4 -1.  -0.6 -0.2 
                                #                               0.2  0.6  1.  1.4  1.8  2.2   2.6  3. ]
     
     for number_of_slices in (np_slice_list):
         slices = np.linspace(start_integral, stop_integral, number_of_slices)# number of for that step  + 1)
-        trapezoid_result_list.append(slices)
+        universal_slice_list.append(slices)
 
 
     # this loop will print out the slice_amount with it's corresponding number_of_slices 
-    for slice_amount, number_of_slices in zip(slice_list, trapezoid_result_list):
+    '''
+    for slice_amount, number_of_slices in zip(slice_list, universal_slice_list):
         print(
               f"Slice Amount: {slice_amount}\n"
               f"Number of Slices: {number_of_slices}\n"
         )
-
-
-    # for slice_amount, number_of_slices in slice_list, trapezoid_result_list:
-    #     print(f"Slice Amount: {slice_amount} \n Number of Slices: {trapezoid_result_list} \n ")
+    '''
     
-    # for slices in (np_slice_list):
-    #     print("Numbers:",slices)
-    #     _, trap_result = trapezoid_method(f1, slices)
-    #     trapezoid_result_list.append(trap_result)
-
-    
-    
-    
-    return slice_list
+    return universal_slice_list
     
 
 
-def trapezoid_results(f1, slice_list):
+def trapezoid_results(f1, universal_slice_list):
     print("\n ENTERING: trapezoid_results")
-    
-    trapezoid_result_list = []
-
-    
-    # for slices in slice_list:
-    #     _, trap_result = trapezoid_method(f1, slices)
-    #     trapezoid_result_list.append(trap_result)
         
-    print(trapezoid_result_list)
+    print(universal_slice_list)
+    
+    for inputs in universal_slice_list:
+        trapezoid_method(f1, inputs)
 
+
+
+def simpsons_results(f1, universal_slice_list):
+    print("\n ENTERING: simpsons_results")
+
+    print(universal_slice_list)
+    
+    for inputs in universal_slice_list:
+        simpsons_rule(f1, inputs)
 
 
 def main():
     print("Going Through Entry Point")
     
-    slice_list = slices()
-    trapezoid_results(f1, slice_list)
+    univeral_slice_list = slices()
+    #trapezoid_results(f1, univeral_slice_list)
+    simpsons_results(f1, univeral_slice_list)
 
 if __name__ == "__main__":
    main()
