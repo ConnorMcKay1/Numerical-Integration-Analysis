@@ -39,9 +39,9 @@ def slices():
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
     # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
-    start_slice_amount = 4
+    start_slice_amount = 2
     stop_slice_amount = 20
-    slice_amount_step = 4
+    slice_amount_step = 2
     
     slice_list = [] # list containing number of slices, ex: [4, 8, 12, 16, . . . n]
     
@@ -108,7 +108,6 @@ def gauss_kronrod_method(f1, a, b):
     I2 = integrate.quad(f1, a, b)
     print("Gauss-Kronrod Result:", I2[0])
     return I2[0]
-
 
 # COMPARISON DISPLAY
 def comparison_display(f1):
@@ -248,13 +247,41 @@ def comparison_display(f1):
         label="Simpson's Rule",
         zorder=4
     )
+    
+    # Difference between the two methods
+    difference = np.abs(trap - simp)
+
+    # Draw vertical gap indicators
+    for xi, trap_y, simp_y, gap in zip(x, trap, simp, difference):
+        ax.vlines(
+            xi,
+            ymin=min(trap_y, simp_y),
+            ymax=max(trap_y, simp_y),
+            color="#F4B860",
+            linewidth=2,
+            alpha=0.85,
+            zorder=2
+        )
+
+        # Place difference labels above the higher point
+        ax.annotate(
+            f"Δ {gap:.2f}",
+            xy=(xi, max(trap_y, simp_y)),
+            xytext=(0, 12),
+            textcoords="offset points",
+            ha="center",
+            va="bottom",
+            fontsize=8,
+            color="#F4B860",
+            clip_on=False
+        )
 
     ax.axhline(
         y=reference,
         color=mint,
         linewidth=1.8,
         linestyle=(0, (5, 4)),
-        label=f"Gauss–Kronrod ({reference:.6f})",
+        label=f"Gauss-Kronrod ({reference:.6f})",
         zorder=2
     )
 
@@ -288,7 +315,10 @@ def comparison_display(f1):
         linewidth=0.7
     )
 
-    ax.margins(x=0.06, y=0.12)
+    #ax.margins(x=0.06, y=0.12)
+    ax.margins(x=0.08, y=0.22)
+
+    
 
     ax.legend(
         loc="upper right",
