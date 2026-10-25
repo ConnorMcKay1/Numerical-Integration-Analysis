@@ -110,70 +110,6 @@ def gauss_kronrod_method(f1, a, b):
     return I2[0]
 
 
-## **original** 
-# COMPARISON DISPLAY     
-# def comparison_display(f1):
-#     print("\n ENTERING: comparison_display")
-    
-#     start_integral, stop_integral, slice_list, universal_slice_list = slices()
-    
-#     # X-values
-#     print("PRINTING FROM THE comparison_display FUNCTION", slice_list)
-    
-#     # Y-values
-#     trapezoid_results_list = trapezoid_results(f1, universal_slice_list)
-#     simpsons_results_list = simpsons_results(f1, universal_slice_list)
-#     I2 = gauss_kronrod_method(f1, start_integral, stop_integral) # ex: [4, 8, 12, 16, . . . n]
-    
-#     fig, ax = plt.subplots()
-   
-#     # colours axis red, and places vertical lines for trapezoid slices
-#     # ax.plot(x_axis, y_axis)
-#     ax.axhline(0, color='red', linewidth=.8, zorder=1)
-#     ax.axvline(0, color='red', linewidth=.8, zorder=1)
-   
-
-#     ax.plot(
-#         slice_list,
-#         trapezoid_results_list,
-#         marker='o',
-#         label="Trapezoidal"
-#     )
-
-#     ax.plot(
-#         slice_list,
-#         simpsons_results_list,
-#         marker='s',
-#         label="Simpson's"
-#     )
-
-#     ax.axhline(
-#         y=I2,
-#         color='green',
-#         linestyle='--',
-#         label="Gauss-Kronrod (actual)"
-#     )
-
-#     ax.legend()
-    
-
-#     ax.set(xlabel='Number of Slices', ylabel="Area Under Curve",
-#         title=(
-#             'Trapezoidal Method / Simpson\'s Rule Integration Comparison\n'
-#             + (rf"$\int_{{{start_integral:.6g}}}^{{{stop_integral:.6g}}} {f1.__doc__}\,dx$"
-#                if f1.__doc__
-#                else rf"$\int_{{{start_integral:.6g}}}^{{{start_integral:.6g}}} {f1.__name__}(x)\,dx$"
-#               )
-#             + f" | # of slices: {slice_list}"
-#             )
-#          )
-#     ax.grid(alpha = .5, linestyle = 'dashed')
-#     ax.margins(0.5)
-
-#     plt.show()
-
-
-
 # COMPARISON DISPLAY
 def comparison_display(f1):
     print("\n ENTERING: comparison_display")
@@ -381,16 +317,6 @@ def comparison_display(f1):
     )
 
     plt.show()
-
-
-def main():
-    print("Going Through Entry Point")
-    comparison_display(f1)
-
-
-if __name__ == "__main__":
-    main()
-
 
 
 
