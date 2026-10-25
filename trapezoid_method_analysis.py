@@ -55,7 +55,7 @@ def trapezoid_method(f1, slices):
    y = f1(slices)
    I1 = integrate.trapezoid(y, slices)
    print(f"Trapezoid method result: {I1}|")
-   return slices, y
+   return slices, y, I1
    
 # Connecting Trapezoid Slices    NO LONGER NEEDED
 def slice_connecting(slices, y):
@@ -138,13 +138,13 @@ def main():
    
    a, b, slices = slice_controler()
    
-   #trapezoid_method(f1, slices)
+   trapezoid_method(f1, slices)
    
    _, y = trapezoid_method(f1, slices)
    
    #gauss_kronrod_method(f1, a, b)
    
-   display(f1, slices, y)
+   #display(f1, slices, y)
 
 if __name__ == "__main__":
    main()

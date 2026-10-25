@@ -28,6 +28,8 @@ def simpsons_rule(f1, slices):
    y = f1(slices)
    I1 = integrate.simpson(y, slices)
    print(f"Simpson's rule result: {I1}|")
+   return slices, y, I1
+   
 
 # POLYNOMIAL_CREATOR
 def polynomial_creator(f1, slices):
@@ -136,9 +138,8 @@ def main():
     
     y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
     
-    print(slices)
     
-    #simpsons_rule(f1, slices)
+    simpsons_rule(f1, slices)
     
     #gauss_kronrod_method(f1, a, b)
     
