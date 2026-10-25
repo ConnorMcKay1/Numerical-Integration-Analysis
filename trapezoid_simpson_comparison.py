@@ -2,6 +2,7 @@ import scipy.integrate as integrate
 from numpy import sin, cos, pi
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 from operator import itemgetter
 
 from trapezoid_method_analysis import trapezoid_method
@@ -69,9 +70,8 @@ def slices():
         )
     '''
     
-    return start_integral, stop_integral, slice_list, universal_slice_list
+    return start_slice_amount, stop_slice_amount, slice_amount_step, start_integral, stop_integral, slice_list, universal_slice_list
     
-
 # TRAPEZOID RESULTS
 def trapezoid_results(f1, universal_slice_list):
     print("\n ENTERING: trapezoid_results")
@@ -84,8 +84,9 @@ def trapezoid_results(f1, universal_slice_list):
         #print("Simpson's inputs being added:  ", inputs)
 
     print("Complete list of Trapezoid Results:  ", trapezoid_results_list)
-
-
+    
+    return trapezoid_results_list
+    
 # SIMPSON'S RESULTS
 def simpsons_results(f1, universal_slice_list):
     print("\n ENTERING: simpsons_results")
@@ -98,52 +99,297 @@ def simpsons_results(f1, universal_slice_list):
         #print("Simpson's inputs being added:  ", inputs)
         
     print("Complete list of Simpson's Results:  ", simpsons_results_list)
-        
-        
+    
+    return simpsons_results_list
+               
 # GAUSS-KRONROD METHOD (for accuracy testing)
 def gauss_kronrod_method(f1, a, b):
     print("\n ENTERING: gauss_Kronrod_method")
     I2 = integrate.quad(f1, a, b)
     print("Gauss-Kronrod Result:", I2[0])
-    return I2
-        
-def comparison_display(f1, universal_slice_list):
+    return I2[0]
+
+
+## **original** 
+# COMPARISON DISPLAY     
+# def comparison_display(f1):
+#     print("\n ENTERING: comparison_display")
+    
+#     start_integral, stop_integral, slice_list, universal_slice_list = slices()
+    
+#     # X-values
+#     print("PRINTING FROM THE comparison_display FUNCTION", slice_list)
+    
+#     # Y-values
+#     trapezoid_results_list = trapezoid_results(f1, universal_slice_list)
+#     simpsons_results_list = simpsons_results(f1, universal_slice_list)
+#     I2 = gauss_kronrod_method(f1, start_integral, stop_integral) # ex: [4, 8, 12, 16, . . . n]
+    
+#     fig, ax = plt.subplots()
+   
+#     # colours axis red, and places vertical lines for trapezoid slices
+#     # ax.plot(x_axis, y_axis)
+#     ax.axhline(0, color='red', linewidth=.8, zorder=1)
+#     ax.axvline(0, color='red', linewidth=.8, zorder=1)
+   
+
+#     ax.plot(
+#         slice_list,
+#         trapezoid_results_list,
+#         marker='o',
+#         label="Trapezoidal"
+#     )
+
+#     ax.plot(
+#         slice_list,
+#         simpsons_results_list,
+#         marker='s',
+#         label="Simpson's"
+#     )
+
+#     ax.axhline(
+#         y=I2,
+#         color='green',
+#         linestyle='--',
+#         label="Gauss-Kronrod (actual)"
+#     )
+
+#     ax.legend()
+    
+
+#     ax.set(xlabel='Number of Slices', ylabel="Area Under Curve",
+#         title=(
+#             'Trapezoidal Method / Simpson\'s Rule Integration Comparison\n'
+#             + (rf"$\int_{{{start_integral:.6g}}}^{{{stop_integral:.6g}}} {f1.__doc__}\,dx$"
+#                if f1.__doc__
+#                else rf"$\int_{{{start_integral:.6g}}}^{{{start_integral:.6g}}} {f1.__name__}(x)\,dx$"
+#               )
+#             + f" | # of slices: {slice_list}"
+#             )
+#          )
+#     ax.grid(alpha = .5, linestyle = 'dashed')
+#     ax.margins(0.5)
+
+#     plt.show()
+
+
+
+# COMPARISON DISPLAY
+def comparison_display(f1):
     print("\n ENTERING: comparison_display")
-    
-    start_integral, stop_integral, slice_list, universal_slice_list = slices()
-    
+
+    # Get integration settings and calculate results
+    start_slice_amount, stop_slice_amount, slice_amount_step, start_integral, stop_integral, slice_list, universal_slice_list = slices()
+    print("PRINTING FROM THE comparison_display FUNCTION", slice_list)
+
+
     trapezoid_results_list = trapezoid_results(f1, universal_slice_list)
     simpsons_results_list = simpsons_results(f1, universal_slice_list)
     I2 = gauss_kronrod_method(f1, start_integral, stop_integral)
-    
-    # REMOVE FOR COMPARISON
-    # x_intputs = np.linspace(start_integral, stop_integral, 1000)
-    # x_axis = x_intputs
-    # y_axis = f1(x=x_intputs)
-    fig, ax = plt.subplots()
-   
-    # colours axis red, and places vertical lines for trapezoid slices
-    # ax.plot(x_axis, y_axis)
-    ax.axhline(0, color='red', linewidth=.8, zorder=1)
-    ax.axvline(0, color='red', linewidth=.8, zorder=1)
-   
 
-    
+    # Convert plotting data to predictable numeric formats
+    x = np.asarray(slice_list, dtype=float)
+    trap = np.asarray(trapezoid_results_list, dtype=float)
+    simp = np.asarray(simpsons_results_list, dtype=float)
+    reference = float(np.asarray(I2).squeeze())
 
-    ax.set(xlabel='STEPS', ylabel="F(x)",
-        title=(
-            'Simpson\'s Rule\n'
-            + (rf"$\int_{{{start_integral:.6g}}}^{{{stop_integral:.6g}}} {f1.__doc__}\,dx$"
-               if f1.__doc__
-               else rf"$\int_{{{start_integral:.6g}}}^{{{start_integral:.6g}}} {f1.__name__}(x)\,dx$"
-              )
-            + f" | # of slices: {slice_list}"
-            )
-         )
-    ax.grid(alpha = .5, linestyle = 'dashed')
-    ax.margins(0.5)
+    # Catch mismatched data before Matplotlib raises an error
+    if not (len(x) == len(trap) == len(simp)):
+        raise ValueError(
+            "slice_list, trapezoid results, and Simpson results "
+            "must all have the same length."
+        )
+
+    # Dashboard colors
+    bg_top = "#30343D"
+    bg_bottom = "#17191E"
+    panel = "#22262E"
+    cyan = "#67D9F5"
+    violet = "#B6A0FF"
+    mint = "#66D9A8"
+    text_main = "#F1F5F9"
+    text_muted = "#A8B0BD"
+    grid_color = "#59616E"
+
+    # Figure and gradient background
+    fig = plt.figure(figsize=(13, 8), facecolor=bg_bottom)
+
+    gradient = np.linspace(0, 1, 400).reshape(-1, 1)
+    gradient = np.repeat(gradient, 400, axis=1)
+
+    gradient_map = LinearSegmentedColormap.from_list(
+        "dashboard_grey",
+        [bg_top, "#22252C", bg_bottom]
+    )
+
+    bg_ax = fig.add_axes([0, 0, 1, 1], zorder=0)
+    bg_ax.imshow(
+        gradient,
+        cmap=gradient_map,
+        aspect="auto",
+        extent=[0, 1, 0, 1],
+        interpolation="bicubic"
+    )
+    bg_ax.axis("off")
+
+    # Main plotting panel
+    ax = fig.add_axes([0.09, 0.17, 0.84, 0.59])
+    ax.set_facecolor(panel)
+    ax.set_zorder(2)
+
+    # Header
+    formula = (
+        rf"$\int_{{{start_integral:.6g}}}^"
+        rf"{{{stop_integral:.6g}}} "
+        rf"{f1.__doc__}\,dx$"
+        if f1.__doc__
+        else (
+            rf"$\int_{{{start_integral:.6g}}}^"
+            rf"{{{stop_integral:.6g}}} "
+            rf"{f1.__name__}(x)\,dx$"
+        )
+    )
+
+    fig.text(
+        0.09, 0.94,
+        "NUMERICAL INTEGRATION ANALYSIS",
+        fontsize=10,
+        fontweight="bold",
+        color=cyan
+    )
+
+    fig.text(
+        0.09, 0.885,
+        "Convergence Comparison",
+        fontsize=24,
+        fontweight="bold",
+        color=text_main
+    )
+
+    fig.text(
+        0.09, 0.84,
+        formula,
+        fontsize=13,
+        color=text_muted
+    )
+
+    # Slice configuration subtitle
+    config_text = (
+        f"Slices: {start_slice_amount}-{stop_slice_amount}"
+        f"   |   Increment: {slice_amount_step}"
+    )
+
+    fig.text(
+        0.09, 0.795,
+        config_text,
+        fontsize=10,
+        color=text_muted
+    )
+
+    # Main comparison lines
+    ax.plot(
+        x, trap,
+        color=cyan,
+        linewidth=2.5,
+        marker="o",
+        markersize=7,
+        markerfacecolor=cyan,
+        markeredgecolor=panel,
+        markeredgewidth=1.2,
+        label="Trapezoidal Rule",
+        zorder=3
+    )
+
+    ax.plot(
+        x, simp,
+        color=violet,
+        linewidth=2.5,
+        marker="s",
+        markersize=6.5,
+        markerfacecolor=violet,
+        markeredgecolor=panel,
+        markeredgewidth=1.2,
+        label="Simpson's Rule",
+        zorder=4
+    )
+
+    ax.axhline(
+        y=reference,
+        color=mint,
+        linewidth=1.8,
+        linestyle=(0, (5, 4)),
+        label=f"Gauss–Kronrod ({reference:.6f})",
+        zorder=2
+    )
+
+    # Axes styling
+    ax.set_xlabel(
+        "Number of slices",
+        fontsize=11,
+        color=text_main,
+        labelpad=12
+    )
+
+    ax.set_ylabel(
+        "Approximate integral",
+        fontsize=11,
+        color=text_main,
+        labelpad=12
+    )
+
+    ax.set_xticks(x)
+    ax.tick_params(colors=text_muted, labelsize=10)
+
+    for spine in ax.spines.values():
+        spine.set_color("#414752")
+        spine.set_linewidth(0.8)
+
+    ax.grid(
+        True,
+        color=grid_color,
+        alpha=0.28,
+        linestyle="--",
+        linewidth=0.7
+    )
+
+    ax.margins(x=0.06, y=0.12)
+
+    ax.legend(
+        loc="upper right",
+        facecolor="#2A2F39",
+        edgecolor="#414752",
+        framealpha=0.97,
+        fontsize=10,
+        labelcolor=text_main
+    )
+
+    # Footer
+    fig.text(
+        0.09, 0.085,
+        f"REFERENCE VALUE   {reference:.8f}",
+        fontsize=9,
+        fontweight="bold",
+        color=mint
+    )
+
+    fig.text(
+        0.91, 0.085,
+        f"{len(x)} DATA POINTS",
+        fontsize=9,
+        color=text_muted,
+        ha="right"
+    )
 
     plt.show()
+
+
+def main():
+    print("Going Through Entry Point")
+    comparison_display(f1)
+
+
+if __name__ == "__main__":
+    main()
 
 
 
@@ -151,11 +397,10 @@ def comparison_display(f1, universal_slice_list):
 def main():
     print("Going Through Entry Point")
     
-    _, _ , _, universal_slice_list = slices()
     #trapezoid_results(f1, universal_slice_list)
     #simpsons_results(f1, universal_slice_list)
     
-    comparison_display(f1, universal_slice_list)
+    comparison_display(f1)
 
 if __name__ == "__main__":
    main()
