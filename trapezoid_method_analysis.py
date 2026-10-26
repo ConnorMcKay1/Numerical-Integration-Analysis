@@ -12,7 +12,7 @@ https://cac.cornell.edu/myers/teaching/ComputationalMethods/python/arrays.html
 '''
 
 import scipy.integrate as integrate
-from numpy import sin, cos, pi
+from numpy import sin, cos,tan, pi
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -22,9 +22,11 @@ print("TRAPEZOID_METHOD_ANALYSIS.py")
 
 #f(x)=x^{4}-5x^{2}+10
 #f(x)=((x**4) - (5*(x**2)) + 10)
+#f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
+#f(x)=tan(sin(x))-sin(tan(x))
 def f1(x):
-   """x^4 - 5x^2 + 10"""
-   return ((x**4) - (5*(x**2)) + 10)
+   """tan(sin(x))-sin(tan(x))"""
+   return (tan(sin(x))-sin(tan(x)))
 
 
 # input range --> goes into trap method and display (linespace)
@@ -32,8 +34,8 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 15
-   a = x1 = -3
+   number_of_slices = 200
+   a = x1 = 1
    b = x2 = 3
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
@@ -54,7 +56,7 @@ def trapezoid_method(f1, slices):
    #slices = np.array([-3, -2, -1, 0, 1, 2, 3])
    y = f1(slices)
    I1 = integrate.trapezoid(y, slices)
-   print(f"Trapezoid method result: {I1}|")
+   print(f"Slice amount: {len(slices)}, Trapezoid method result: {I1}|")
    return slices, y, I1
    
 # Connecting Trapezoid Slices    NO LONGER NEEDED
@@ -140,11 +142,11 @@ def main():
    
    trapezoid_method(f1, slices)
    
-   _, y = trapezoid_method(f1, slices)
+   _, y, _ = trapezoid_method(f1, slices)
    
    #gauss_kronrod_method(f1, a, b)
    
-   #display(f1, slices, y)
+   display(f1, slices, y)
 
 if __name__ == "__main__":
    main()

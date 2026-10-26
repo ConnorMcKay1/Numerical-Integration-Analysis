@@ -1,5 +1,5 @@
 import scipy.integrate as integrate
-from numpy import sin, cos, pi
+from numpy import sin, cos, tan, pi
 import numpy as np
 import matplotlib.pyplot as plt
       
@@ -8,15 +8,17 @@ print("SIMPSONS_METHOD_ANALYSIS.py")
 
 #f(x)=x^{4}-5x^{2}+10
 #f(x)=((x**4) - (5*(x**2)) + 10)X
+#f(x) = ((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
+#f(x)=tan(sin(x))-sin(tan(x))
 def f1(x):
-   """x^4 - 5x^2 + 10"""
-   return ((x**4) - (5*(x**2)) + 10)
+   """tan(sin(x))-sin(tan(x))"""
+   return (tan(sin(x))-sin(tan(x)))
 
 # SLICE CONTROLLER
 def slice_controller():
     print("\n ENTERING: slice_controler")
-    number_of_slices = 16
-    a = -3
+    number_of_slices = 4
+    a = 1
     b = 3
     slices = np.linspace(a, b, number_of_slices + 1)
         
@@ -27,7 +29,7 @@ def simpsons_rule(f1, slices):
    print("\n ENTERING: simpsons rule")
    y = f1(slices)
    I1 = integrate.simpson(y, slices)
-   print(f"Simpson's rule result: {I1}|")
+   print(f"Panel amount: {len(slices)}, Simpson's rule result: {I1}|")
    return slices, y, I1
    
 
@@ -139,11 +141,11 @@ def main():
     y, _, smooth_polynomial_inputs, smooth_polynomial_values = polynomial_creator(f1, slices)
     
     
-    simpsons_rule(f1, slices)
+    #simpsons_rule(f1, slices)
     
     #gauss_kronrod_method(f1, a, b)
     
-    #display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
+    display(f1, slices, y, smooth_polynomial_inputs, smooth_polynomial_values)
 
 
 if __name__ == "__main__":

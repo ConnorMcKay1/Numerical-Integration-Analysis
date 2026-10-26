@@ -1,5 +1,5 @@
 import scipy.integrate as integrate
-from numpy import sin, cos, pi
+from numpy import sin, cos, tan, pi
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -25,22 +25,24 @@ print("TRAPEZOID_SIMPSON_COMPARISON.py")
 
 #f(x)=x^{4}-5x^{2}+10
 #f(x)=((x**4) - (5*(x**2)) + 10)X
+#f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
+#f(x)=tan(sin(x))-sin(tan(x))
 def f1(x):
-   """x^4 - 5x^2 + 10"""
-   return ((x**4) - (5*(x**2)) + 10)
+   """tan(sin(x))-sin(tan(x))"""
+   return (tan(sin(x))-sin(tan(x)))
 
 # SLICEs
 def slices():
     print("\n ENTERING: slices")
 
     # start / stop for function, it sets the boundaries of the integral
-    start_integral = -3
+    start_integral = 1
     stop_integral = 3    
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
     # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
     start_slice_amount = 2
-    stop_slice_amount = 20
+    stop_slice_amount = 200
     slice_amount_step = 2
     
     slice_list = [] # list containing number of slices, ex: [4, 8, 12, 16, . . . n]
@@ -81,9 +83,8 @@ def trapezoid_results(f1, universal_slice_list):
     for inputs in universal_slice_list:
         _, _, I1 = trapezoid_method(f1, inputs)
         trapezoid_results_list.append(I1)
-        #print("Simpson's inputs being added:  ", inputs)
-
-    print("Complete list of Trapezoid Results:  ", trapezoid_results_list)
+    
+    print("EXITING: trapezoid_results ########### \n")
     
     return trapezoid_results_list
     
@@ -96,10 +97,9 @@ def simpsons_results(f1, universal_slice_list):
     for inputs in universal_slice_list:
         _, _, I1 = simpsons_rule(f1, inputs)
         simpsons_results_list.append(I1)
-        #print("Simpson's inputs being added:  ", inputs)
         
-    print("Complete list of Simpson's Results:  ", simpsons_results_list)
-    
+    print("\n EXITING: trapezoid_results ########### \n")
+            
     return simpsons_results_list
                
 # GAUSS-KRONROD METHOD (for accuracy testing)
@@ -115,8 +115,6 @@ def comparison_display(f1):
 
     # Get integration settings and calculate results
     start_slice_amount, stop_slice_amount, slice_amount_step, start_integral, stop_integral, slice_list, universal_slice_list = slices()
-    print("PRINTING FROM THE comparison_display FUNCTION", slice_list)
-
 
     trapezoid_results_list = trapezoid_results(f1, universal_slice_list)
     simpsons_results_list = simpsons_results(f1, universal_slice_list)
