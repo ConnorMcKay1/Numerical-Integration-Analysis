@@ -17,7 +17,7 @@ def f1(x):
 # SLICE CONTROLLER
 def slice_controller():
     print("\n ENTERING: slice_controler")
-    number_of_slices = 4
+    number_of_slices = 50
     a = 1
     b = 3
     slices = np.linspace(a, b, number_of_slices + 1)
