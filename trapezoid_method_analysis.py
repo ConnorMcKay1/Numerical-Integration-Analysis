@@ -12,7 +12,7 @@ https://cac.cornell.edu/myers/teaching/ComputationalMethods/python/arrays.html
 '''
 
 import scipy.integrate as integrate
-from numpy import sin, cos,tan, pi
+from numpy import sin, cos, tan, pi, e
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -25,9 +25,12 @@ print("TRAPEZOID_METHOD_ANALYSIS.py")
 #f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
 #f(x)=tan(sin(x))-sin(tan(x))
 #f(x)=sin(1/x)
+#f(x)=(sin(100*x))/(1+(50*((x-3)**2)))
+#f(x)=(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
+#f(x)=(5*((x-4)**3))-(7*((x-4)**2))
 def f1(x):
-   """sin(1/x)"""
-   return (sin(1/x))
+   """(5*((x-4)**3))-(7*((x-4)**2))"""
+   return (5*((x-4)**3))-(7*((x-4)**2))
 
 
 # input range --> goes into trap method and display (linespace)
@@ -35,9 +38,9 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 15
-   a = x1 = -.5
-   b = x2 = .5
+   number_of_slices = 10
+   a = x1 = 3.5
+   b = x2 = 5.5
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
    while len(slices) <= number_of_slices:
@@ -48,6 +51,7 @@ def slice_controler():
       
    #print("Slice Step Distance: ", slice_step_distance)
    #print("List of slices: ", slices)
+
    
    return a, b, slices
    
@@ -57,7 +61,7 @@ def trapezoid_method(f1, slices):
    #slices = np.array([-3, -2, -1, 0, 1, 2, 3])
    y = f1(slices)
    I1 = integrate.trapezoid(y, slices)
-   print(f"Slice amount: {len(slices)}, Trapezoid method result: {I1}|")
+   print(f"Slice amount: {len(slices) - 1}, Trapezoid method result: {I1}|")
    return slices, y, I1
    
 # Connecting Trapezoid Slices    NO LONGER NEEDED
@@ -143,7 +147,7 @@ def main():
    
    
    # return: slices, y, I1 and prints slices/result
-   trapezoid_method(f1, slices)
+   #trapezoid_method(f1, slices)
    
    _, y, _ = trapezoid_method(f1, slices)
    

@@ -1,5 +1,5 @@
 import scipy.integrate as integrate
-from numpy import sin, cos, tan, pi
+from numpy import sin, cos, tan, pi, e
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -24,12 +24,15 @@ print("TRAPEZOID_SIMPSON_COMPARISON.py")
 
 
 #f(x)=x^{4}-5x^{2}+10
-#f(x)=((x**4) - (5*(x**2)) + 10)X
+#f(x)=((x**4) - (5*(x**2)) + 10)
 #f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
 #f(x)=tan(sin(x))-sin(tan(x))
+#f(x)=sin(1/x)
+#(sin(100*x))/(1+(50*((x-3)**2)))
+#(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 def f1(x):
-   """tan(sin(x))-sin(tan(x))"""
-   return (tan(sin(x))-sin(tan(x)))
+   """(e**(-5*((x-2)**2)))*(sin(200*(x**2)))"""
+   return (e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 
 # SLICEs
 def slices():
@@ -37,13 +40,13 @@ def slices():
 
     # start / stop for function, it sets the boundaries of the integral
     start_integral = 1
-    stop_integral = 3    
+    stop_integral = 3
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
     # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
-    start_slice_amount = 2
+    start_slice_amount = 10
     stop_slice_amount = 200
-    slice_amount_step = 2
+    slice_amount_step = 10
     
     slice_list = [] # list containing number of slices, ex: [4, 8, 12, 16, . . . n]
     
@@ -351,8 +354,11 @@ def comparison_display(f1):
 def main():
     print("Going Through Entry Point")
     
+    start_slice_amount, stop_slice_amount, slice_amount_step, start_integral, stop_integral, slice_list, universal_slice_list = slices()
+    
     #trapezoid_results(f1, universal_slice_list)
     #simpsons_results(f1, universal_slice_list)
+    #gauss_kronrod_method(f1,a = start_integral,b = stop_integral)
     
     comparison_display(f1)
 
