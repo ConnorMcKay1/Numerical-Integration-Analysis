@@ -24,9 +24,10 @@ print("TRAPEZOID_METHOD_ANALYSIS.py")
 #f(x)=((x**4) - (5*(x**2)) + 10)
 #f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
 #f(x)=tan(sin(x))-sin(tan(x))
+#f(x)=sin(1/x)
 def f1(x):
-   """tan(sin(x))-sin(tan(x))"""
-   return (tan(sin(x))-sin(tan(x)))
+   """sin(1/x)"""
+   return (sin(1/x))
 
 
 # input range --> goes into trap method and display (linespace)
@@ -34,9 +35,9 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 200
-   a = x1 = 1
-   b = x2 = 3
+   number_of_slices = 15
+   a = x1 = -.5
+   b = x2 = .5
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
    while len(slices) <= number_of_slices:
@@ -140,6 +141,8 @@ def main():
    
    a, b, slices = slice_controler()
    
+   
+   # return: slices, y, I1 and prints slices/result
    trapezoid_method(f1, slices)
    
    _, y, _ = trapezoid_method(f1, slices)
