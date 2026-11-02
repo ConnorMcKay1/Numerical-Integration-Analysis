@@ -7,22 +7,22 @@ import matplotlib.pyplot as plt
 print("SIMPSONS_METHOD_ANALYSIS.py")
 
 #f(x)=x^{4}-5x^{2}+10
-#f(x)=((x**4) - (5*(x**2)) + 10)X
-#f(x) = ((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
-#f(x)=tan(sin(x))-sin(tan(x))
+#--> f(x)=((x**4) - (5*(x**2)) + 10)
+#--> f(x) = ((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
+#--> f(x)=tan(sin(x))-sin(tan(x))
 #f(x)=sin(1/x)
-#(sin(100*x))/(1+(50*((x-3)**2)))
+#--> (sin(100*x))/(1+(50*((x-3)**2)))
 #(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 def f1(x):
-   """(e**(-5*((x-2)**2)))*(sin(200*(x**2)))"""
-   return (e**(-5*((x-2)**2)))*(sin(200*(x**2)))
+   """tan(sin(x))-sin(tan(x))"""
+   return tan(sin(x))-sin(tan(x))
 
 # SLICE CONTROLLER
 def slice_controller():
     print("\n ENTERING: slice_controler")
-    number_of_slices = 16
-    a = -.5
-    b = 4
+    number_of_slices = 60
+    a = 1
+    b = pi
     slices = np.linspace(a, b, number_of_slices + 1)
         
     return a, b, slices

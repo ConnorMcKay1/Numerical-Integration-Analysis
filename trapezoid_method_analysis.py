@@ -29,8 +29,8 @@ print("TRAPEZOID_METHOD_ANALYSIS.py")
 #f(x)=(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 #f(x)=(5*((x-4)**3))-(7*((x-4)**2))
 def f1(x):
-   """f(x)=((x**4) - (5*(x**2)) + 10)"""
-   return ((x**4) - (5*(x**2)) + 10)
+   """tan(sin(x))-sin(tan(x))"""
+   return tan(sin(x))-sin(tan(x))
 
 
 # input range --> goes into trap method and display (linespace)
@@ -38,9 +38,9 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 20
-   a = x1 = -3
-   b = x2 = 3
+   number_of_slices = 60
+   a = x1 = 1
+   b = x2 = pi
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
    while len(slices) <= number_of_slices:
