@@ -14,15 +14,15 @@ print("SIMPSONS_METHOD_ANALYSIS.py")
 #(sin(100*x))/(1+(50*((x-3)**2)))
 #(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 def f1(x):
-   """(sin(100*x))/(1+(50*((x-3)**2)))"""
-   return (sin(100*x))/(1+(50*((x-3)**2)))
+   """(e**(-5*((x-2)**2)))*(sin(200*(x**2)))"""
+   return (e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 
 # SLICE CONTROLLER
 def slice_controller():
     print("\n ENTERING: slice_controler")
-    number_of_slices = 15
+    number_of_slices = 16
     a = -.5
-    b = .5
+    b = 4
     slices = np.linspace(a, b, number_of_slices + 1)
         
     return a, b, slices
@@ -89,7 +89,7 @@ def display(f, slices, y, smooth_polynomial_inputs, smooth_polynomial_values):
     print("\n ENTERING: display")
     
     min, max = slices.min(), slices.max()
-    x_intputs = np.linspace(min, max, 1000)
+    x_intputs = np.linspace(min, max, 10000)
     x_axis = x_intputs
     y_axis = f(x=x_intputs)
     fig, ax = plt.subplots()

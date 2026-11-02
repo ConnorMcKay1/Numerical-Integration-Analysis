@@ -24,29 +24,29 @@ print("TRAPEZOID_SIMPSON_COMPARISON.py")
 
 
 #f(x)=x^{4}-5x^{2}+10
-#f(x)=((x**4) - (5*(x**2)) + 10)
-#f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
-#f(x)=tan(sin(x))-sin(tan(x))
+#--> f(x)=((x**4) - (5*(x**2)) + 10)  (-3,3)
+#--> f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))  (.04,1.325)
+#--> f(x)=tan(sin(x))-sin(tan(x))
 #f(x)=sin(1/x)
-#(sin(100*x))/(1+(50*((x-3)**2)))
-#(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
+#--> (sin(100*x))/(1+(50*((x-3)**2)))  (2,4)
+#(e**(-5*((x-2)**2)))*(sin(200*(x**2)))  (1,3)
 def f1(x):
-   """(e**(-5*((x-2)**2)))*(sin(200*(x**2)))"""
-   return (e**(-5*((x-2)**2)))*(sin(200*(x**2)))
+   """tan(sin(x))-sin(tan(x))"""
+   return tan(sin(x))-sin(tan(x))
 
-# SLICEs
+# SLICES
 def slices():
     print("\n ENTERING: slices")
 
     # start / stop for function, it sets the boundaries of the integral
     start_integral = 1
-    stop_integral = 3
+    stop_integral = pi
     
     # [SYMBOLIC PSEUDO] this is for the list of "# of slices" to be computed
     # esentially it will make a, list of lists [4, 8, 12, 16, . . . n]
-    start_slice_amount = 10
-    stop_slice_amount = 200
-    slice_amount_step = 10
+    start_slice_amount = 2
+    stop_slice_amount = 60
+    slice_amount_step = 2
     
     slice_list = [] # list containing number of slices, ex: [4, 8, 12, 16, . . . n]
     

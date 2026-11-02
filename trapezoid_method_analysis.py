@@ -21,16 +21,16 @@ print("TRAPEZOID_METHOD_ANALYSIS.py")
 
 
 #f(x)=x^{4}-5x^{2}+10
-#f(x)=((x**4) - (5*(x**2)) + 10)
-#f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
-#f(x)=tan(sin(x))-sin(tan(x))
+#--> f(x)=((x**4) - (5*(x**2)) + 10)
+#--> f(x)=((np.sqrt(x) + 1)**3)/(2*(np.sqrt(x)))
+#--> f(x)=tan(sin(x))-sin(tan(x))
 #f(x)=sin(1/x)
-#f(x)=(sin(100*x))/(1+(50*((x-3)**2)))
+#--> f(x)=(sin(100*x))/(1+(50*((x-3)**2)))
 #f(x)=(e**(-5*((x-2)**2)))*(sin(200*(x**2)))
 #f(x)=(5*((x-4)**3))-(7*((x-4)**2))
 def f1(x):
-   """(5*((x-4)**3))-(7*((x-4)**2))"""
-   return (5*((x-4)**3))-(7*((x-4)**2))
+   """f(x)=((x**4) - (5*(x**2)) + 10)"""
+   return ((x**4) - (5*(x**2)) + 10)
 
 
 # input range --> goes into trap method and display (linespace)
@@ -38,9 +38,9 @@ def f1(x):
 #number of slices
 def slice_controler():
    print("\n ENTERING: slice_controler")
-   number_of_slices = 10
-   a = x1 = 3.5
-   b = x2 = 5.5
+   number_of_slices = 20
+   a = x1 = -3
+   b = x2 = 3
    slice_step_distance = (x2-x1)/number_of_slices
    slices = [x1]
    while len(slices) <= number_of_slices:
@@ -97,7 +97,7 @@ def display(f, slices, y):
    print("\n ENTERING: display")
    
    min, max = slices.min(), slices.max()
-   x_intputs = np.linspace(min, max, 1000)
+   x_intputs = np.linspace(min, max, 10000)
    x_axis = x_intputs
    y_axis = f(x=x_intputs)
    fig, ax = plt.subplots()
@@ -151,7 +151,7 @@ def main():
    
    _, y, _ = trapezoid_method(f1, slices)
    
-   #gauss_kronrod_method(f1, a, b)
+   gauss_kronrod_method(f1, a, b)
    
    display(f1, slices, y)
 
