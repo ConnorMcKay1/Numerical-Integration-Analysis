@@ -67,6 +67,7 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 ->Dynamically controlling the number of slices/panels is important in graphing the comparison between the methods. The reason is because an array/list needs to be created in order to display multiple predetermined amount inputs. Which will then be iterated into each respective SciPy function. 
 
 I knew that since the accuracy of both methods are dependent on the number of slices/panels, increasing them both in parallel would show their respective characteristics.
+
     - Is there a ratios between the 2 values for a slice?
 </p>
 
@@ -78,8 +79,10 @@ I knew that since the accuracy of both methods are dependent on the number of sl
 <p>
 A graph that displays the difference (delta) between Trapezoidal Method and Simpson's Rule as they approach the actual value for the area under the curve as more "slices/panels" are applied to gain accuracy.
 This has shown a noteworthy finding, that for certain functions which exhibit non-standard features/properties (oscillations) is trapezoid better?
-    -The idea came from computing: f(x)=tan(sin(x))-sin(tan(x))
-    -And so could the number of times trapezoid is better tell/mean something?
+
+    - The idea came from computing: f(x)=tan(sin(x))-sin(tan(x))
+
+    - And so could the number of times trapezoid is better tell/mean something?
 
 
 The Topologist's Sine Wave [f(x) = sin(1/x)] proved to be a hurde for the Comparison portion of the project because as the function's x-input approaches 0, the function's y-output approaches infinity. For that reason . . . 
