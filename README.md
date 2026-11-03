@@ -11,7 +11,19 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 
 <hr style="border: none; height: 5px; background-color: #ff6b6b;">
 
-<h4 align = "Center"> Trapezoid Method <h4>
+<table border="0">
+  <tr>
+    <td><img src="images/Trapezoid/F1_Trapezoid(1).png" width="300" alt="Image 1"></td>
+    <td><img src="images/Trapezoid/F2_Trapezoid(1).png" width="300" alt="Image 2"></td>
+  </tr>
+  <tr>
+    <td><img src="images/Trapezoid/F3_Trapezoid(1).png" width="300" alt="Image 3"></td>
+    <td><img src="images/Trapezoid/F4_Trapezoid(1).png" width="300" alt="Image 4"></td>
+  </tr>
+</table>
+
+
+<!-- <h4 align = "Center"> Trapezoid Method <h4>
 
 <p align="center">
   <img src="images/Trapezoid_Slices(1).png" width="600">
@@ -23,13 +35,15 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 
 <p align="center">
   <img src="images/Trapezoid_Slices(3).png" width="600">
-</p>
+</p> -->
 
 <hr style="border: none; height: 5px; background-color: #ff6b6b;">
 
 <h4 align = "Center"> Simpson's Rule <h4>
 
-<p align="center">
+
+
+<!-- <p align="center">
   <img src="images/Simpsons_Slices(1).png" width="600">
 </p>
 
@@ -39,6 +53,6 @@ The goal is simply to investigate the accuracy of Trapezoidal Method versus Simp
 
 <p align="center">
   <img src="images/Simpsons_Slices(3).png" width="600">
-</p>
+</p> -->
 
 
